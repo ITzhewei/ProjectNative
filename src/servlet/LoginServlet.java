@@ -48,6 +48,8 @@ public class LoginServlet extends HttpServlet {
             req.getRequestDispatcher("/index.jsp").forward(req, resp);
         }else {
             resp.sendRedirect(contextPath+"/login.jsp");
+
+
         }
     }
 
