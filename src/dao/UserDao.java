@@ -12,6 +12,13 @@ public interface UserDao {
      * @param user
      * @throws Exception
      */
-    public void addUser(User user) throws Exception;
+    void addUser(User user) throws Exception;
 
+    /**
+     * 根据用户名和密码查找
+     * @param user
+     * @return
+     * @throws Exception
+     */
+    User findUser(User user) throws Exception;
 }

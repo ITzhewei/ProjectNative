@@ -6,6 +6,7 @@ import utils.DbUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 
 /**
@@ -33,6 +34,35 @@ public class UserDaoImpl implements UserDao {
         } finally {
             DbUtils.closeAll(null, ps, conn);
         }
+    }
+
+    @Override
+    public User findUser(User user) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        User u = null;
+        try {
+            conn = DbUtils.getConnection();
+            ps = conn.prepareStatement("SELECT * FROM users WHERE username=? AND PASSWORD=?;");
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getPassword());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                u = new User();
+                u.setId(rs.getInt(1));
+                u.setUsername(rs.getString(2));
+                u.setPassword(rs.getString(3));
+                u.setEmail(rs.getString(4));
+                u.setBirthday(rs.getDate(5));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("读取信息失败!");
+        } finally {
+            DbUtils.closeAll(rs, ps, conn);
+        }
+        return u;
     }
 
 }

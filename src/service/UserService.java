@@ -15,4 +15,13 @@ public interface UserService {
      */
     public void register(User user) throws Exception;
 
+    /**
+     * 登录
+     *
+     * @param user
+     * @return
+     * @throws Exception
+     */
+    public User login(User user) throws Exception;
+
 }

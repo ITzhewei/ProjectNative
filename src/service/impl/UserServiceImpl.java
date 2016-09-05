@@ -15,4 +15,10 @@ public class UserServiceImpl implements UserService {
     public void register(User user) throws Exception {
         userDao.addUser(user);
     }
+
+    @Override
+    public User login(User user) throws Exception {
+        User u = userDao.findUser(user);
+        return u;
+    }
 }
